@@ -8,25 +8,30 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "Operator.h"
+#import "CommonConstants.h"
 
 @interface Problem : NSObject {
     
-    CCArray* operands;
-    CCArray* operatorChar;
-    NSMutableDictionary *answers;
-    
-    
+    Operator* problemOperator;
+    NSNumber* firstOperand;
+    NSNumber* secondOperand;
+    NSNumber* solution;
+    NSMutableSet* answers;
     
 }
 
-- (id)initWithOperands:(CCArray*) newOperands
-         withOperators:(CCArray *) newOperator
-           withAnswers:(NSDictionary*) newAnswers;
+- (id)initWithFirstOperand:(NSNumber*) newFirstOperand
+         withSecondOperand:(NSNumber*) newSecondOperand
+         withOperators:(Operator*) newOperator
+           withAnswers:(NSMutableSet*) newAnswers;
 
-@property (nonatomic, retain) CCArray* operands;
-@property (nonatomic, retain) CCArray* operatorChar;
-@property (nonatomic, retain) NSDictionary* answers;
 
+@property (nonatomic, retain) NSNumber* firstOperand;
+@property (nonatomic, retain) NSNumber* secondOperand;
+@property (nonatomic, retain) NSNumber* solution;
+@property (nonatomic, retain) NSMutableSet* answers;
+@property (nonatomic, retain) Operator* problemOperator;
 
 
 @end

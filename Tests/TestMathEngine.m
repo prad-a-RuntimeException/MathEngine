@@ -5,6 +5,8 @@
 #import "MathEngine.h"
 #import "Problem.h"
 #import "cocos2d.h"
+//#import "CommonConstants.h"
+
 
 @interface TestMathEngine : GHTestCase { 
     
@@ -31,7 +33,7 @@
 
 - (void)setUp {
     // Run before each test method
-    mathEngine = [[MathEngine alloc] initWithLevelNumber: 0];
+   mathEngine = [[MathEngine alloc] initWithLevelNumber: 1];
 }
 
 - (void)tearDown {
@@ -59,56 +61,58 @@
     }
 }
 
-- (void)testMathEngine {
- 
-    GHTestLog(@"Entering testMathEngine");
-    
-    Problem* problem = [[mathEngine problemGenerator] retain];
-    
-    [self printAnswers:problem];
-    
-    //  Add Level
-    
-    [mathEngine proceedToNextLevel:1];
-    
-    problem = [[mathEngine problemGenerator] retain];
-    
-   
-    [self printAnswers:problem];
-    
-    [mathEngine proceedToNextLevel:1];
-    
-    problem = [[mathEngine problemGenerator] retain];
+
+- (void) printAnswers:(Problem*) problem {
+
+
+    GHTestLog(@"Problem Statement:");
     
     
-    [self printAnswers:problem];
+    GHTestLog(@"%i %@ %i = ?", [problem.firstOperand intValue], [OperatorSymbols objectAtIndex: problem.problemOperator.symbolIndex], [problem.secondOperand intValue]);
+
+    
+    //List of possible answers
+    
+    GHTestLog(@"\nThe Possible Answers are: ");
+    NSEnumerator *enumerator = [[problem answers] objectEnumerator];
+    
+    NSNumber* value;
+    
+    while ((value = [enumerator nextObject])) {
+        
+       GHTestLog(@"%i",[value intValue]);
+        
+    }    
     
     
-    
-   
+    GHTestLog(@"\nThe Correct Answer = %i", [problem.solution intValue]);
+    GHTestLog(@"_______________________________");
     
 }
 
--(void) printAnswers:(Problem*) problem {
-    // Print Operands
-    NSNumber* val;
-    NSNumber* val1;
+- (void) testMathEngine {
+ 
     
-    CCARRAY_FOREACH([problem operands], val) {
-        GHTestLog(@" %i", val.intValue);
-        CCARRAY_FOREACH([problem operatorChar], val1) {
-            [self printOperator:val1.intValue];
-        }
-    }
-       
-    GHTestLog(@"Answers:");
+    //GHTestLog(@"Entering testMathEngine");
+    
+    Problem* problem = nil;
+    
+    problem = [[mathEngine generateProblem] retain];
+    
+    [self printAnswers: problem];
+    
+    
+    //Increment Level
+    
+    [mathEngine proceedToNextLevel:4];
+    
+    problem = [[mathEngine generateProblem] retain];
+    
    
-    for(NSNumber *aKey in [problem answers]){
-   
-        GHTestLog(@"%@ Answer %i",[[problem answers] objectForKey:aKey],  aKey.intValue);
-        
-    }
+    [self printAnswers:problem];
+    
 }
+
 
 
 @end

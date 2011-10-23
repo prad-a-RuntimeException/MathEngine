@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Level.h"
+#import "Operator.h"
+#import "CommonConstants.h"
 
-@interface LevelCreator : NSObject
+
+@interface LevelManager : NSObject
+
+
+
+-(Level*) createLevel:(int) levelNumber;
 
 @end

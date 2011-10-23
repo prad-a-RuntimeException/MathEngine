@@ -8,41 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "CommonConstants.h"
 #import "Problem.h"
-#define TotalLevels  7;
-
-typedef enum {
-    
-    Plus=1,
-    Minus=2,
-    Multiplication=3,
-    Division=4
-    
-} Operators;
-
-
-typedef enum {
-    
-    SingleDigit =1,
-    MultipleDigit=2,
-    TwoDigits=3
-    
-} Digits;
-
+#import "LevelManager.h"
 
 
 
 @interface MathEngine : NSObject {
     
     
-    int permittedOperations;
-    int numOfDigits;
-    int numOfOperands;
-    int levelNumber;
-    bool enableNegativeNumbers;
-    bool enableFractions;
-    
+    Level* currentLevel;
     Problem* mathProblem;
+    LevelManager* levelManager;
 
     
     
@@ -50,20 +27,13 @@ typedef enum {
 
 - (id)initWithLevelNumber:(int) newLevelNumber;
 -(void) proceedToNextLevel:(int) stepSize;
--(Problem*) problemGenerator;
+-(Problem*) generateProblem;
+-(void) setDefaultLevel;
 
-@property(nonatomic) int permittedOperations;
-@property(nonatomic) int numOfDigits;
-@property(nonatomic) int numOfOperands;
-@property(nonatomic) int levelNumber;
-@property(nonatomic) bool enableNegativeNumbers;
-@property(nonatomic) bool enableFractions;
+
+@property(nonatomic, retain) Level* currentLevel;
 @property(nonatomic, retain) Problem* mathProblem;
-
-
-
-
-
+@property(nonatomic, retain) LevelManager* levelManager;
 
 
 @end

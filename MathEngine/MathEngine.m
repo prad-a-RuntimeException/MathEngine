@@ -8,23 +8,21 @@
 
 #import "MathEngine.h"
 
+/*
 @interface MathEngine ()
--(int) opertorGenerator;
--(int) operandGenerator;
+-(int) generateOperand;
+-(int) generateOperator;
 -(int) generateNegativeOptions:(int) answer;
 @end
+*/
 
 
 @implementation MathEngine
 
-@synthesize numOfDigits;
-@synthesize numOfOperands;
-@synthesize permittedOperations;
-@synthesize levelNumber;
-@synthesize enableFractions;
-@synthesize enableNegativeNumbers;
-@synthesize mathProblem;
 
+@synthesize currentLevel;
+@synthesize mathProblem;
+@synthesize levelManager;
 
 // By default the level number should be one, but 
 // the the math engine could be instantiated with an higher level number also.
@@ -32,20 +30,13 @@
 {
     
     self = [super init];
-    if (self) {
+    if (self != nil) {
         
-        levelNumber = newLevelNumber;
+        levelManager = [LevelManager alloc];
+        currentLevel = [levelManager createLevel:newLevelNumber];
         
-        if(levelNumber == 0) {
-            
-            permittedOperations = Plus;
-            numOfOperands = 2;
-            numOfDigits = SingleDigit;
-            enableNegativeNumbers = NO;
-            enableFractions = NO;
-            
-        }
-        
+    }else{
+        NSLog(@"Fatal Error: Could not instantiate MathEngine ############################################");
     }
     
     return self;
@@ -53,190 +44,183 @@
 
 -(void) proceedToNextLevel:(int) stepSize {
     
-    levelNumber = levelNumber + stepSize;
     
-    switch (levelNumber) {
-        case 1:
-            permittedOperations = Minus;
-            break;
-            
-        case 2:
-            numOfDigits = MultipleDigit;
-            permittedOperations = Plus;
-            break;
-            
-        case 3:
-            numOfDigits = MultipleDigit;
-            permittedOperations = Minus;
-            break;
-            
-        case 4:
-            numOfDigits = MultipleDigit;
-            permittedOperations = Multiplication;
-            break;
-            
-        case 5:
-            numOfDigits = MultipleDigit;
-            permittedOperations = Division;
-            break;
-            
-        case 6:
-            enableNegativeNumbers = YES;
-            break;
-            
-        case 7:
-            enableFractions = YES;
-            break;
-            
-        default:
-            break;
-    }
+    int levelNumber = [currentLevel levelNumber] + stepSize;
+    
+    currentLevel = [levelManager createLevel:levelNumber]; 
+ 
     
 }
 
 
 
--(Problem*) problemGenerator {
+-(Problem*) generateProblem {
     
-    // Will have to operand Generator
-    CCArray* operands = [[[CCArray alloc] init] autorelease];
+/*
+     
+     1. Get the currently active Level
+     2. Get Operator from Level
+     3. Get Operand 1 from Level
+     4. Get Operand 2 from Level
+     5. Generate the problem
+     
+*/
+
+
     
-    NSNumber* firstOperand = [NSNumber numberWithInteger:[self operandGenerator]];
-    NSNumber* secondOperand = [NSNumber numberWithInteger:[self operandGenerator]];
+    // 1. Get currently active Level
     
-    if(firstOperand >= secondOperand ) {
-        [operands addObject:firstOperand ];
-        [operands addObject:secondOperand ];
-    } else {
-        [operands addObject:secondOperand ];
-        [operands addObject:firstOperand ];
+    if(self.currentLevel == nil){
+
+        [self setDefaultLevel];   
+            
     }
     
-    CCArray* operators = [[[CCArray alloc] init] autorelease];
     
-    NSNumber* operator = [NSNumber numberWithInteger:[self opertorGenerator]];
+    // 2. Set Active Operator
     
-    [operators addObject:operator ];
+    [currentLevel setActiveOperator];
     
-    int solution =0;
-    NSNumber* val;
-        CCARRAY_FOREACH(operands, val) {
-       
-        switch (operator.intValue) {
-            case Plus:
-                solution = solution + val.intValue;
-                break;
-                
-            case Minus:
-                solution = solution - val.intValue;
-                break;
-                
-            case Division:
-                if(solution == 0)
-                    solution = 1;
-                solution = solution / val.intValue;
-                break;
-                
-            case Multiplication:
-                if(solution == 0)
-                    solution = 1;
-                solution = solution * val.intValue;
-                break;
-                
-            default:
-                break;
-        }
+    // 3. Get First Operand 
+    
+    int firstOperand = [currentLevel generateOperand:currentLevel.activeOperator.firstMaximumOperand];
+    
+    
+    // 4. Get second Operand
+
+    int secondOperand = [currentLevel generateOperand:currentLevel.activeOperator.secondMaximumOperand];
+    
+    //ensure that if negatives are not allowed then answer should not be negative either
+    if((firstOperand < secondOperand) && !currentLevel.enableNegativeNumbers){
+
+        //swap the operand so that firstoperand > secondoperand to avoid -ve answer
+        int temp = firstOperand;
+        firstOperand = secondOperand;
+        secondOperand = temp;
         
     }
     
-    // Now its time to generate the Problem Object.\
+    // 5. Generate the problem
     
-//    [[NSDictionary alloc] initWithObjectsAndKeys:
-//     [ZFont fontWithUIFont:[UIFont systemFontOfSize:12]], ZFontAttributeName,
-//     [UIColor blackColor], ZForegroundColorAttributeName,
-//     [UIColor clearColor], ZBackgroundColorAttributeName,
-//     [NSNumber numberWithInt:ZUnderlineStyleNone], ZUnderlineStyleAttributeName,
-//     nil];
+            //5.1 Setup the problem
+    Problem* problem = [Problem alloc];
     
-    NSNumber* sol = [NSNumber numberWithInt:solution];
-    NSNumber* opt1 =  [NSNumber numberWithInt:[self generateNegativeOptions:solution]];
-    NSNumber* opt2 =  [NSNumber numberWithInt:[self generateNegativeOptions:solution]];
+    problem.firstOperand = [NSNumber numberWithInt: firstOperand];
+    problem.secondOperand = [NSNumber numberWithInt: secondOperand];    
+    problem.problemOperator = currentLevel.activeOperator;
     
-    CCLOG(@"Answers %@, %@, %@", sol, opt1, opt2);
+    problem.answers = [[NSMutableSet alloc] init];
     
-    NSMutableDictionary* answers = [[NSMutableDictionary alloc] init];
-    [answers setObject:@"True" forKey:sol];
-    [answers setObject:@"False" forKey:opt1];
-    [answers setObject:@"False" forKey:opt2];
+    int correctAnswer;
+    int wrongAnswer1;
+    int wrongAnswer2;
+    int wrongAnswer3;
     
-    
-    Problem* problem = [[[Problem alloc] initWithOperands:operands 
-                                           withOperators:operators 
-                                             withAnswers:answers] autorelease];
+    switch (currentLevel.activeOperator.symbolIndex) {
+            
+        case ADDITION:
+            
+            //generate problem solution
+            correctAnswer = firstOperand + secondOperand;
+            problem.solution = [NSNumber numberWithInt: correctAnswer];
+            [problem.answers addObject: [NSNumber numberWithInt: correctAnswer]];
+            
+                            
+            //generate possible answers list
+            wrongAnswer1 = firstOperand - secondOperand;
+            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer1]];
+               
+            
+            wrongAnswer2 = firstOperand * secondOperand;
+            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer2]];            
+               
+            
+            wrongAnswer3 = (firstOperand / (secondOperand + 1));
+            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer3]];
+              
+
+            break;
+            
+        case SUBTRACTION:
+            
+            //generate problem solution
+            correctAnswer = firstOperand - secondOperand;
+            problem.solution = [NSNumber numberWithInt: correctAnswer];
+            [problem.answers addObject: [NSNumber numberWithInt: correctAnswer]];
+            
+            //generate possible answers list
+            wrongAnswer1 = firstOperand + secondOperand;
+            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer1]];
+            
+            wrongAnswer2 = firstOperand * secondOperand;
+            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer2]];            
+            
+            
+            wrongAnswer3 = (firstOperand / (secondOperand + 1));
+            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer3]];
+            
+            
+            break;            
+           
+        case MULTIPLICATION:
+            
+            //generate problem solution
+            correctAnswer = firstOperand * secondOperand;
+            problem.solution = [NSNumber numberWithInt: correctAnswer];
+            [problem.answers addObject: [NSNumber numberWithInt: correctAnswer]];
+            
+            //generate possible answers list
+            wrongAnswer1 = firstOperand - secondOperand;
+            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer1]];
+            
+            wrongAnswer2 = firstOperand + secondOperand;
+            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer2]];            
+            
+            
+            wrongAnswer3 = (firstOperand / (secondOperand + 1));
+            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer3]];
+            
+            
+            break;
+            
+        case DIVISION:
+            
+            //generate problem solution
+            correctAnswer = firstOperand / secondOperand;
+            problem.solution = [NSNumber numberWithInt: correctAnswer];
+            [problem.answers addObject: [NSNumber numberWithInt: correctAnswer]];
+            
+            //generate possible answers list
+            wrongAnswer1 = firstOperand - secondOperand;
+            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer1]];
+            
+            wrongAnswer2 = firstOperand * secondOperand;
+            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer2]];            
+            
+            
+            wrongAnswer3 = firstOperand + secondOperand + 1;
+            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer3]];
+            
+            
+            break;            
+        default:
+            break;
+    }
     
     
     return problem;
     
 }
 
--(int) generateNegativeOptions:(int) answer {
-    
-    NSInteger num = (arc4random() % 29) + answer;
-    return num;
-    
-    
-}
 
--(int) opertorGenerator {
+
+-(void) setDefaultLevel {
     
-    
-    int operator  = arc4random()% permittedOperations;
-    if(operator  == 0) {
-        operator++;
-    }
-    
-    return operator;
+   currentLevel = [levelManager createLevel:1 ]; 
     
 }
 
 
-
--(int) operandGenerator {
-    
-    int operand;
-    int digit = (arc4random() % 2) +1;
-   
-    
-    switch (numOfDigits) {
-        case SingleDigit:
-            operand=  arc4random() % 10;
-            break;
-        case MultipleDigit:
-            
-            if(digit == SingleDigit) {
-                operand=  arc4random() % 10;
-            } else if (digit == MultipleDigit) {
-                operand = arc4random() % 40;
-            }
-            break;
-            
-        case TwoDigits:
-            
-            
-            operand = arc4random() % 40;
-            
-            break;
-            
-            
-            
-        default:
-            break;
-    }
-    
-    return operand;
-    
-    
-}
 
 
 

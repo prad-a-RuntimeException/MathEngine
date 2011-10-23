@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A5D953D142F7D9D005F72A6 /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5D953C142F7D9D005F72A6 /* Level.m */; };
+		3A5D959D1438D35D005F72A6 /* Operator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5D959C1438D35D005F72A6 /* Operator.m */; };
+		3A5D95A014423773005F72A6 /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5D959F14423773005F72A6 /* GHUnitIOSTestMain.m */; };
+		3A5D95A114423829005F72A6 /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5D953C142F7D9D005F72A6 /* Level.m */; };
+		3A5D95A214423830005F72A6 /* Operator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5D959C1438D35D005F72A6 /* Operator.m */; };
 		923C2C40142A9AA2009434D1 /* Problem.m in Sources */ = {isa = PBXBuildFile; fileRef = 923C2C3F142A9AA2009434D1 /* Problem.m */; };
 		923C2C4B142AA519009434D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 925600B014266BEA000F9CD7 /* UIKit.framework */; };
 		923C2C4C142AA519009434D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 925600B214266BEA000F9CD7 /* Foundation.framework */; };
@@ -14,10 +19,9 @@
 		923C2C53142AA519009434D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 923C2C51142AA519009434D1 /* InfoPlist.strings */; };
 		923C2C6D142AA641009434D1 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 923C2C6C142AA641009434D1 /* GHUnitIOS.framework */; };
 		923C2C74142AA792009434D1 /* SetupTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 923C2C72142AA71C009434D1 /* SetupTest.m */; };
-		923C2C75142AA795009434D1 /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 923C2C6E142AA6CA009434D1 /* GHUnitIOSTestMain.m */; };
 		923C2C79142AA846009434D1 /* Problem.m in Sources */ = {isa = PBXBuildFile; fileRef = 923C2C3F142A9AA2009434D1 /* Problem.m */; };
 		923C2C7A142AA84A009434D1 /* MathEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 9256021914266C1D000F9CD7 /* MathEngine.m */; };
-		923C2C7B142AA84C009434D1 /* LevelCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9256021C1426709D000F9CD7 /* LevelCreator.m */; };
+		923C2C7B142AA84C009434D1 /* LevelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9256021C1426709D000F9CD7 /* LevelManager.m */; };
 		923C2C7C142AA967009434D1 /* TestMathEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 923C2C77142AA7E8009434D1 /* TestMathEngine.m */; };
 		923C2D58142AA9A2009434D1 /* CCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 923C2C80142AA9A2009434D1 /* CCAction.m */; };
 		923C2D59142AA9A2009434D1 /* CCActionCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 923C2C82142AA9A2009434D1 /* CCActionCamera.m */; };
@@ -239,10 +243,16 @@
 		9256020D14266BEC000F9CD7 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9256020C14266BEC000F9CD7 /* RootViewController.m */; };
 		9256021014266BEC000F9CD7 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9256020F14266BEC000F9CD7 /* HelloWorldLayer.m */; };
 		9256021A14266C1D000F9CD7 /* MathEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 9256021914266C1D000F9CD7 /* MathEngine.m */; };
-		9256021D1426709D000F9CD7 /* LevelCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9256021C1426709D000F9CD7 /* LevelCreator.m */; };
+		9256021D1426709D000F9CD7 /* LevelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9256021C1426709D000F9CD7 /* LevelManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A0EFDDE144AA20600FA7BB5 /* CommonConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonConstants.h; sourceTree = "<group>"; };
+		3A5D953B142F7D9D005F72A6 /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
+		3A5D953C142F7D9D005F72A6 /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level.m; sourceTree = "<group>"; };
+		3A5D959B1438D35D005F72A6 /* Operator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Operator.h; sourceTree = "<group>"; };
+		3A5D959C1438D35D005F72A6 /* Operator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Operator.m; sourceTree = "<group>"; };
+		3A5D959F14423773005F72A6 /* GHUnitIOSTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUnitIOSTestMain.m; sourceTree = "<group>"; };
 		923C2C3E142A9AA2009434D1 /* Problem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Problem.h; sourceTree = "<group>"; };
 		923C2C3F142A9AA2009434D1 /* Problem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Problem.m; sourceTree = "<group>"; };
 		923C2C49142AA519009434D1 /* Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -250,7 +260,6 @@
 		923C2C52142AA519009434D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		923C2C56142AA519009434D1 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		923C2C6C142AA641009434D1 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = MathEngine/GHUnitIOS.framework; sourceTree = "<group>"; };
-		923C2C6E142AA6CA009434D1 /* GHUnitIOSTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHUnitIOSTestMain.m; path = ../../../Downloads/GHUnitIOSTestMain.m; sourceTree = "<group>"; };
 		923C2C72142AA71C009434D1 /* SetupTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupTest.m; sourceTree = "<group>"; };
 		923C2C77142AA7E8009434D1 /* TestMathEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestMathEngine.m; sourceTree = "<group>"; };
 		923C2C7F142AA9A2009434D1 /* CCAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAction.h; sourceTree = "<group>"; };
@@ -703,8 +712,8 @@
 		9256021114266BEC000F9CD7 /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		9256021814266C1D000F9CD7 /* MathEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathEngine.h; sourceTree = "<group>"; };
 		9256021914266C1D000F9CD7 /* MathEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MathEngine.m; sourceTree = "<group>"; };
-		9256021B1426709D000F9CD7 /* LevelCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelCreator.h; sourceTree = "<group>"; };
-		9256021C1426709D000F9CD7 /* LevelCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelCreator.m; sourceTree = "<group>"; };
+		9256021B1426709D000F9CD7 /* LevelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelManager.h; sourceTree = "<group>"; };
+		9256021C1426709D000F9CD7 /* LevelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -748,6 +757,10 @@
 			children = (
 				923C2C3E142A9AA2009434D1 /* Problem.h */,
 				923C2C3F142A9AA2009434D1 /* Problem.m */,
+				3A5D953B142F7D9D005F72A6 /* Level.h */,
+				3A5D953C142F7D9D005F72A6 /* Level.m */,
+				3A5D959B1438D35D005F72A6 /* Operator.h */,
+				3A5D959C1438D35D005F72A6 /* Operator.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -755,9 +768,9 @@
 		923C2C4E142AA519009434D1 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				3A5D959F14423773005F72A6 /* GHUnitIOSTestMain.m */,
 				923C2C7D142AA9A2009434D1 /* libs */,
 				923C2C70142AA707009434D1 /* Classes */,
-				923C2C6E142AA6CA009434D1 /* GHUnitIOSTestMain.m */,
 				923C2C4F142AA519009434D1 /* Supporting Files */,
 			);
 			path = Tests;
@@ -1157,6 +1170,7 @@
 				925600C614266BEA000F9CD7 /* Icon@2x.png */,
 				925600C814266BEA000F9CD7 /* Info.plist */,
 				925600C914266BEA000F9CD7 /* iTunesArtwork */,
+				3A0EFDDE144AA20600FA7BB5 /* CommonConstants.h */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1478,8 +1492,8 @@
 				923C2C3C142A9A6D009434D1 /* Models */,
 				9256021814266C1D000F9CD7 /* MathEngine.h */,
 				9256021914266C1D000F9CD7 /* MathEngine.m */,
-				9256021B1426709D000F9CD7 /* LevelCreator.h */,
-				9256021C1426709D000F9CD7 /* LevelCreator.m */,
+				9256021B1426709D000F9CD7 /* LevelManager.h */,
+				9256021C1426709D000F9CD7 /* LevelManager.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1584,10 +1598,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				923C2C74142AA792009434D1 /* SetupTest.m in Sources */,
-				923C2C75142AA795009434D1 /* GHUnitIOSTestMain.m in Sources */,
 				923C2C79142AA846009434D1 /* Problem.m in Sources */,
 				923C2C7A142AA84A009434D1 /* MathEngine.m in Sources */,
-				923C2C7B142AA84C009434D1 /* LevelCreator.m in Sources */,
+				923C2C7B142AA84C009434D1 /* LevelManager.m in Sources */,
 				923C2C7C142AA967009434D1 /* TestMathEngine.m in Sources */,
 				923C2D58142AA9A2009434D1 /* CCAction.m in Sources */,
 				923C2D59142AA9A2009434D1 /* CCActionCamera.m in Sources */,
@@ -1683,6 +1696,9 @@
 				923C2DB7142AA9A2009434D1 /* CJSONDeserializer.m in Sources */,
 				923C2DB8142AA9A2009434D1 /* CJSONScanner.m in Sources */,
 				923C2DB9142AA9A2009434D1 /* CJSONSerializer.m in Sources */,
+				3A5D95A014423773005F72A6 /* GHUnitIOSTestMain.m in Sources */,
+				3A5D95A114423829005F72A6 /* Level.m in Sources */,
+				3A5D95A214423830005F72A6 /* Operator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1789,8 +1805,10 @@
 				9256020D14266BEC000F9CD7 /* RootViewController.m in Sources */,
 				9256021014266BEC000F9CD7 /* HelloWorldLayer.m in Sources */,
 				9256021A14266C1D000F9CD7 /* MathEngine.m in Sources */,
-				9256021D1426709D000F9CD7 /* LevelCreator.m in Sources */,
+				9256021D1426709D000F9CD7 /* LevelManager.m in Sources */,
 				923C2C40142A9AA2009434D1 /* Problem.m in Sources */,
+				3A5D953D142F7D9D005F72A6 /* Level.m in Sources */,
+				3A5D959D1438D35D005F72A6 /* Operator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1948,6 +1966,7 @@
 				923C2C65142AA519009434D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9256009C14266BEA000F9CD7 /* Build configuration list for PBXProject "MathEngine" */ = {
 			isa = XCConfigurationList;

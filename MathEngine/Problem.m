@@ -10,21 +10,35 @@
 
 @implementation Problem
 
-@synthesize operands;
-@synthesize operatorChar;
+@synthesize problemOperator;
+@synthesize firstOperand;
+@synthesize secondOperand;
+@synthesize solution;
 @synthesize answers;
 
-- (id)initWithOperands:(CCArray*) newOperands
-         withOperators:(CCArray *) newOperator
-           withAnswers:(NSDictionary*) newAnswers
+- (id)initWithFirstOperand:(NSNumber*) newFirstOperand
+         withSecondOperand:(NSNumber*) newSecondOperand
+             withOperators:(Operator*) newOperator
+               withAnswers:(NSMutableSet*) newAnswers
+{
+    self = [super init];
+    if (self != nil) {
+        
+        self.problemOperator = newOperator;    
+        self.firstOperand = newFirstOperand;
+        self.secondOperand = newSecondOperand;
+        self.answers = newAnswers;
+    }
+    
+    return self;
+}
+
+- (id)init
 {
     self = [super init];
     if (self) {
-        
-        
-        self.operands = newOperands;
-        self.operatorChar = newOperator;
-        self.answers = newAnswers;
+        self.problemOperator = [Operator alloc];
+        self.answers = [[NSMutableSet alloc] init];
     }
     
     return self;
