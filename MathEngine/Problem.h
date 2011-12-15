@@ -26,6 +26,8 @@
          withOperators:(Operator*) newOperator
            withAnswers:(NSMutableSet*) newAnswers;
 
+- (void) generateSolution;
+- (void) generatePossibleAnswers;
 
 @property (nonatomic, retain) NSNumber* firstOperand;
 @property (nonatomic, retain) NSNumber* secondOperand;

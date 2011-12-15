@@ -16,11 +16,10 @@
     int firstMaximumOperand;
     int secondMaximumOperand;
     int symbolIndex;   //the index of the operator in the operatorSymbols array (global array of operator symbols)  
-    //NSArray* operatorSymbols = [NSArray arrayWithObjects:"+", "-", "*", "//", nil];   //Symbol for the operator: i.e +, -, etc
     
 }
 
-- (id)initWithMaximumOperand:(int) newMaximumOperand
+- (id)initWithMaximumOperands:(int) newMaximumOperand
      withFirstMaximumOperand:(int) newFirstMaxOperand
      withSecondMaximumOperand:(int) newSecondMaxOperand
                     withSymbolIndex:(int) newSymbolIndex;

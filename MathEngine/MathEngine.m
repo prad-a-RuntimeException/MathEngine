@@ -25,7 +25,7 @@
 @synthesize levelManager;
 
 // By default the level number should be one, but 
-// the the math engine could be instantiated with an higher level number also.
+// the the math engine could be instantiated with a higher level number also.
 - (id)initWithLevelNumber:(int) newLevelNumber
 {
     
@@ -66,7 +66,6 @@
      
 */
 
-
     
     // 1. Get currently active Level
     
@@ -100,6 +99,13 @@
         
     }
     
+    //if active operator is division, then ensure the second operand (divisor) is never zero.
+    if(currentLevel.activeOperator.symbolIndex == DIVISION){
+        if(secondOperand == 0){
+            secondOperand++;
+        }
+    }    
+    
     // 5. Generate the problem
     
             //5.1 Setup the problem
@@ -111,101 +117,12 @@
     
     problem.answers = [[NSMutableSet alloc] init];
     
-    int correctAnswer;
-    int wrongAnswer1;
-    int wrongAnswer2;
-    int wrongAnswer3;
+    //generate problem solution
+    [problem generateSolution];
     
-    switch (currentLevel.activeOperator.symbolIndex) {
-            
-        case ADDITION:
-            
-            //generate problem solution
-            correctAnswer = firstOperand + secondOperand;
-            problem.solution = [NSNumber numberWithInt: correctAnswer];
-            [problem.answers addObject: [NSNumber numberWithInt: correctAnswer]];
-            
-                            
-            //generate possible answers list
-            wrongAnswer1 = firstOperand - secondOperand;
-            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer1]];
-               
-            
-            wrongAnswer2 = firstOperand * secondOperand;
-            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer2]];            
-               
-            
-            wrongAnswer3 = (firstOperand / (secondOperand + 1));
-            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer3]];
-              
-
-            break;
-            
-        case SUBTRACTION:
-            
-            //generate problem solution
-            correctAnswer = firstOperand - secondOperand;
-            problem.solution = [NSNumber numberWithInt: correctAnswer];
-            [problem.answers addObject: [NSNumber numberWithInt: correctAnswer]];
-            
-            //generate possible answers list
-            wrongAnswer1 = firstOperand + secondOperand;
-            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer1]];
-            
-            wrongAnswer2 = firstOperand * secondOperand;
-            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer2]];            
-            
-            
-            wrongAnswer3 = (firstOperand / (secondOperand + 1));
-            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer3]];
-            
-            
-            break;            
-           
-        case MULTIPLICATION:
-            
-            //generate problem solution
-            correctAnswer = firstOperand * secondOperand;
-            problem.solution = [NSNumber numberWithInt: correctAnswer];
-            [problem.answers addObject: [NSNumber numberWithInt: correctAnswer]];
-            
-            //generate possible answers list
-            wrongAnswer1 = firstOperand - secondOperand;
-            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer1]];
-            
-            wrongAnswer2 = firstOperand + secondOperand;
-            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer2]];            
-            
-            
-            wrongAnswer3 = (firstOperand / (secondOperand + 1));
-            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer3]];
-            
-            
-            break;
-            
-        case DIVISION:
-            
-            //generate problem solution
-            correctAnswer = firstOperand / secondOperand;
-            problem.solution = [NSNumber numberWithInt: correctAnswer];
-            [problem.answers addObject: [NSNumber numberWithInt: correctAnswer]];
-            
-            //generate possible answers list
-            wrongAnswer1 = firstOperand - secondOperand;
-            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer1]];
-            
-            wrongAnswer2 = firstOperand * secondOperand;
-            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer2]];            
-            
-            
-            wrongAnswer3 = firstOperand + secondOperand + 1;
-            [problem.answers addObject: [NSNumber numberWithInt: wrongAnswer3]];
-            
-            
-            break;            
-        default:
-            break;
-    }
+    
+    //generate list of possible answers
+    [problem generatePossibleAnswers];
     
     
     return problem;
@@ -219,8 +136,6 @@
    currentLevel = [levelManager createLevel:1 ]; 
     
 }
-
-
 
 
 

@@ -18,11 +18,12 @@
 @synthesize symbolIndex;
 
 
-- (id)initWithMaximumOperand:(int) newMaximumOperand 
-                    withSymbolIndex:(int)newSymbolIndex {
+- (id)initWithMaximumOperands:(int)newMaximumOperand withFirstMaximumOperand:(int)newFirstMaxOperand withSecondMaximumOperand:(int)newSecondMaxOperand withSymbolIndex:(int)newSymbolIndex {
     
     self = [super init];
     self.maximumOperand = newMaximumOperand;
+    self.firstMaximumOperand = newFirstMaxOperand;
+    self.secondMaximumOperand = newSecondMaxOperand;
     self.symbolIndex = newSymbolIndex;
     
     
@@ -33,9 +34,9 @@
 //default initializations
 
 - (id)init
-{
+{ 
     self = [super init];
-    if (self) {
+    if (self != nil) {
         self.maximumOperand = SINGLEDIGIT;
         self.symbolIndex = ADDITION; 
     }

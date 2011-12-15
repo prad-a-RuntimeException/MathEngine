@@ -86,7 +86,7 @@
     
     
     GHTestLog(@"\nThe Correct Answer = %i", [problem.solution intValue]);
-    GHTestLog(@"_______________________________");
+    GHTestLog(@"_________________________________ ");
     
 }
 
@@ -103,14 +103,14 @@
     
     
     //Increment Level
-    
-    [mathEngine proceedToNextLevel:4];
+/*    
+    [mathEngine proceedToNextLevel:3];
     
     problem = [[mathEngine generateProblem] retain];
     
    
     [self printAnswers:problem];
-    
+*/    
 }
 
 

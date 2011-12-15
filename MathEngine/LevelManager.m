@@ -25,7 +25,7 @@
 
 -(Level*) createLevel:(int) levelNumber {
         
-    if(levelNumber == maximumLevel) {
+    if(levelNumber > maximumLevel) {
         
         levelNumber = maximumLevel; //ensure that the levelnumber does not exceed the maximum.
     }    
@@ -121,10 +121,11 @@
             newOperator3.secondMaximumOperand = TWODIGITS; 
             
             level.permittedOperators = [NSArray arrayWithObjects:newOperator1, newOperator2, newOperator3, nil];
+            
             break;
             
         case 6:
-
+            // level 6 = Level 5 + Division of 
 
             break;
             
@@ -153,6 +154,15 @@
             break;
             
         default:
+            // Default Level = Level One.
+            
+            //level 1 only allows Addition of single digit positive integers 
+            newOperator1 = [Operator alloc];
+            newOperator1.symbolIndex = ADDITION;
+            newOperator1.firstMaximumOperand = SINGLEDIGIT;
+            newOperator1.secondMaximumOperand = SINGLEDIGIT;
+            
+            level.permittedOperators = [NSArray arrayWithObject:newOperator1];            
             break;
     }
        
